@@ -10,24 +10,17 @@ int main()
      // sum cost of tea
     int cnt; // counter
     int i;
-        int MONEY_CASHIER[5] ={100,50,20,10,5};
-        int MONEY_STOCK[5] = {1,0,1,1,0};
-	int ihun, ifit, itw, ite, ifi;
+        // int MONEY_CASHIER[5] ={100,50,20,10,5};
+        int MONEY_STOCK[5] = {10,10,10,10,10};
 	char a;
         int sum_STOCK = 0;
-        int imon[5] = {0,0,0,0,0,};
-		int chun, cfit, ctw, cten, cfiv;
-       
+       for (i=0;i<4;i++) //Topping Stock
+        tp[i]=10;
 
-
-    new : 
     x: //The 'q' restartint cost=0;
     system("cls");
-    cost = 0;
-
-
-    for (i=0;i<4;i++) //Topping Stock
-        tp[i]=1;    
+    int cost;
+    cost = 0;  
     
     
     printf("Welcome to Boba cafe\n");
@@ -113,7 +106,7 @@ int main()
                 case '0':printf("You choose Normal Flavor\n");cnt++;break;
                 case '1':printf("You choose Milk Flavor\n");cost+=5;cnt++;break;
                 case '2':printf("You choose Honey\n");cost+=5;cnt++;break;
-                case '3':printf("You choose Brown Sugar Flavor\n");cost+=5;cnt++;break;
+                case '3':printf("You choose Brown Sugar Flavor\n");cost+=10;cnt++;break;
                 default :printf("Invalid Input\n");printf("Please Enter your flavor\n");scanf("%s",flav);
             }
         }
@@ -207,7 +200,7 @@ int main()
     printf("Sum = %d\n",cost);
 
     int conf;
-    printf("Reay to pay your order sir?(1=y or 0=n)\n");
+    printf("Ready to pay your order sir?(1=y or 0=n)\n");
     scanf("%d",&conf);
     if(conf == 0){
         goto x;
@@ -219,12 +212,9 @@ int main()
 	int ihun, ifit, itw, ite, ifi;
 	int total;
 	char a;*/
-	    int c;
-        int cost;
-        int itotal = (imon[0] *100) + (imon[1] *50) + (imon[2] *20) + (imon[3] *10) + (imon[4] *5);
-        int change = itotal - cost;
-        int price;
-		//int imon[5] = {0,0,0,0,0,};
+	    int imon[5] = {0,0,0,0,0,};
+        int c;
+        
 	
 	
 		printf("Machine cash : (100 = %d, 50 = %d, 20 = %d, 10 = %d, 5 = %d)\n", MONEY_STOCK[0],MONEY_STOCK[1],MONEY_STOCK[2],MONEY_STOCK[3],MONEY_STOCK[4]);
@@ -276,7 +266,8 @@ int main()
 				imon[4] = (a - 48);
 			}
 			 a = 0;
-	
+
+	 int itotal = (imon[0] *100) + (imon[1] *50) + (imon[2] *20) + (imon[3] *10) + (imon[4] *5);    
     //int itotal = (imon[0] *100) + (imon[1] *50) + (imon[2] *20) + (imon[3] *10) + (imon[4] *5);
 	/*int itotfial = (ihun *100) + (ifit *50) + (itw *20) + (ifi *10) + (ifi *5);*/
 		
@@ -286,31 +277,31 @@ int main()
 		
 		/*printf("Insert Price: ");
 		scanf(" %d", &price);*/
-		
 		//compute change
 		/*int sum_STOCK  = 0;
 		int change = itotal - cost;
 		int c;
 		int chun, cfit, ctw, cten, cfiv;*/
-			
-			chun = 0;
-			cfit = 0;
-			ctw  = 0;
-			cten = 0;
-			cfiv = 0;  
+		int change = itotal - cost;
+		int	chun[5] = {0,0,0,0,0};  
 			c = change;
-		 for(int i = 0 ; i<5 ; i++){
-            sum_STOCK += MONEY_STOCK[i];
-        }
+
+    for(int i = 0 ; i < 5 ; i++)
+    {
+        MONEY_STOCK[i] += imon[i];
+    }
+    sum_STOCK = (MONEY_STOCK[0]*100) + (MONEY_STOCK[1]*50) + (MONEY_STOCK[2]*20) + (MONEY_STOCK[3]*10) + (MONEY_STOCK[4]*5);
+
+    
         if(sum_STOCK-change>=0){
-            goto y ;
+            goto y;
         }
         else
         {
             printf("Not enough money");
             goto x;
         }
-        y : 
+        y: 
 		do
 		{
 				if(change - 100 < 0)
@@ -319,7 +310,7 @@ int main()
 				}
 				change = change - 100;
 				c = change;                         
-				chun ++;
+				chun[0] ++;
 		}
 		while( c > 0 );
 		do
@@ -330,7 +321,7 @@ int main()
 				}
 				change = change - 50;
 				c = change;
-				cfit ++;
+				chun[1] ++;
 			}
 		while( c > 0 );
 		do
@@ -341,7 +332,7 @@ int main()
 				}
 				change = change - 20;
 				c = change;
-				ctw ++;
+				chun[2] ++;
 			}
 		while( c > 0 );
 		do	
@@ -352,7 +343,7 @@ int main()
 				}
 				change = change - 10;
 				c = change;
-				cten ++;
+				chun[3] ++;
 			}
 		while( c > 0 );
 		do	
@@ -363,25 +354,38 @@ int main()
 				}
 				change = change - 5;
 				c = change;
-				cfiv ++;
+				chun[4] ++;
 			}
 		while( c > 0);
 		
 	
 
 		printf("Here is your change\n");		
-		printf("100: %d\n", chun);
-		printf("50: %d\n", cfit);
-		printf("20: %d\n", ctw);
-		printf("10: %d\n", cten);
-		printf("5: %d\n", cfiv);
+		printf("100: %d\n", chun[0]);
+		printf("50: %d\n", chun[1]);
+		printf("20: %d\n", chun[2]);
+		printf("10: %d\n", chun[3]);
+		printf("5: %d\n", chun[4]);
 				
         char d;
         printf("Thank you!\n");
 		printf("Please enter any charactor to continue...\n");
         scanf(" %c",&d);
 			// int c: printf("exit\n");
-		goto new;
+
+    //restock
+
+        for(int i = 0 ; i < 5 ; i++)
+        {
+            MONEY_STOCK[i] -= chun[i];
+        }
+        for(int j = 0 ; j < 4 ; j++)
+        {
+            tp[j] = tmtp[j];
+        }
+
+            
+		goto x;
 		
 		return 0;
 	}
